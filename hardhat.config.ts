@@ -12,6 +12,10 @@ import "solidity-coverage";
 import "./tasks/accounts";
 import "./tasks/FHECounter";
 
+import * as dotenv from "dotenv";
+dotenv.config();
+
+
 // Run 'npx hardhat vars setup' to see the list of variables that need to be set
 
 const MNEMONIC: string = vars.get("MNEMONIC", "test test test test test test test test test test test junk");
@@ -49,13 +53,12 @@ const config: HardhatUserConfig = {
       url: "http://localhost:8545",
     },
     sepolia: {
-      accounts: {
-        mnemonic: MNEMONIC,
-        path: "m/44'/60'/0'/0/",
-        count: 10,
-      },
+      url: process.env.SEPOLIA_RPC_URL || "",  // RPC URL from .env
+      accounts: process.env.PRIVATE_KEY
+        ? [process.env.PRIVATE_KEY.startsWith("0x") ? process.env.PRIVATE_KEY : `0x${process.env.PRIVATE_KEY}`]
+        : [],  // Single PK as array or empty if missing
       chainId: 11155111,
-      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
+      gasPrice: 50_000_000_000, // 10 Gwei
     },
   },
   paths: {
