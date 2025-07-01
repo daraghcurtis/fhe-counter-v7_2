@@ -58,7 +58,6 @@ const config: HardhatUserConfig = {
         ? [process.env.PRIVATE_KEY.startsWith("0x") ? process.env.PRIVATE_KEY : `0x${process.env.PRIVATE_KEY}`]
         : [],  // Single PK as array or empty if missing
       chainId: 11155111,
-      gasPrice: 50_000_000_000, // 10 Gwei
     },
   },
   paths: {
