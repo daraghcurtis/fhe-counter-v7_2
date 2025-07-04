@@ -14,7 +14,7 @@ contract FHECounterMulti is SepoliaConfig {
     }
 
     /// @notice Increments the counter by a specified encrypted value.
-    function increment(externalEuint32 inputEuint32, bytes calldata inputProof) external {
+    function incrementUnit(externalEuint32 inputEuint32, bytes calldata inputProof) external {
         euint32 encryptedEuint32 = FHE.fromExternal(inputEuint32, inputProof);
 
         _count = FHE.add(_count, encryptedEuint32);
@@ -24,7 +24,7 @@ contract FHECounterMulti is SepoliaConfig {
     }
 
     /// @notice Decrements the counter by a specified encrypted value.
-    function decrement(externalEuint32 inputEuint32, bytes calldata inputProof) external {
+    function decrementUnit(externalEuint32 inputEuint32, bytes calldata inputProof) external {
         euint32 encryptedEuint32 = FHE.fromExternal(inputEuint32, inputProof);
 
         _count = FHE.sub(_count, encryptedEuint32);

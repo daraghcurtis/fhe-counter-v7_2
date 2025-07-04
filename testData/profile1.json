@@ -1,0 +1,51 @@
+[
+  {
+    "OBJECT_ID": "5000029885",
+    "Calculated_Premium": 1009.2,
+    "Factors_Details": [
+      {
+        "Field_Name": "SEX",
+        "Source_Value": 0,
+        "Rate_Factor_Value": 1
+      },
+      {
+        "Field_Name": "EFFECTIVE_YR",
+        "Source_Value": 8,
+        "Rate_Factor_Value": 8
+      },
+      {
+        "Field_Name": "PROD_YEAR",
+        "Source_Value": 2007,
+        "Rate_Factor_Value": 31
+      },
+      {
+        "Field_Name": "NUM_SEATS",
+        "Source_Value": 4,
+        "Rate_Factor_Value": 5
+      },
+      {
+        "Field_Name": "CARRYING_CAPACITY",
+        "Source_Value": 6,
+        "Rate_Factor_Value": 4
+      },
+      {
+        "Field_Name": "VEHICLE_TYPE",
+        "Source_Value": "Pick-up",
+        "Rate_Factor_Value": 4,
+        "Mapping_ID": 102
+      },
+      {
+        "Field_Name": "VEHICLE_MAKE",
+        "Source_Value": "NISSAN",
+        "Rate_Factor_Value": 25,
+        "Mapping_ID": 524
+      },
+      {
+        "Field_Name": "VEHICLE_USAGE",
+        "Source_Value": "Own Goods",
+        "Rate_Factor_Value": 5,
+        "Mapping_ID": 603
+      }
+    ]
+  }
+]
