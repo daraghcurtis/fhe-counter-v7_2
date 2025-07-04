@@ -8,7 +8,7 @@ import type { TaskArguments } from "hardhat/types";
  * Multi-value increment:
  *   npx hardhat --network localhost task:increment --value1 1 --value2 2 --value3 3
  */
-task("task:increment", "Calls the increment() function of FHECounterMulti Contract")
+task("task:increment multi", "Calls the increment() function of FHECounterMulti Contract")
   .addOptionalParam("address", "Optionally specify the FHECounterMulti contract address")
   .addParam("value1", "The first value")
   .addParam("value2", "The second value")
@@ -55,7 +55,7 @@ task("task:increment", "Calls the increment() function of FHECounterMulti Contra
       console.log(`FHECounterMulti increment(${value1}+${value2}+${value3}) succeeded!`);
   });
 
-task("task:decrypt-count", "Calls the getCount() function of FHECounterMulti Contract")
+task("task:decrypt-count-multi-variable", "Calls the getCount() function of FHECounterMulti Contract")
   .addOptionalParam("address", "Optionally specify the Counter contract address")
   .setAction(async function (taskArguments: TaskArguments, hre) {
       const { ethers, deployments, fhevm } = hre;
