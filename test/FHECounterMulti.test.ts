@@ -4,6 +4,14 @@ import { expect } from "chai";
 import { FhevmType } from "@fhevm/hardhat-plugin";
 import { FHECounterMulti, FHECounterMulti__factory } from "../types";
 
+/**
+ * To run these tests, use:
+ *
+ *     npx hardhat test test/FHECounterMulti.test.ts
+ *
+ * Make sure you are running a local FHEVM mock environment.
+ */
+
 type Signers = {
   deployer: HardhatEthersSigner;
   alice: HardhatEthersSigner;

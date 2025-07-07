@@ -8,6 +8,7 @@ import type { TaskArguments } from "hardhat/types";
  * Multi-value increment:
  *   npx hardhat --network localhost task:increment --value1 1 --value2 2 --value3 3
  */
+
 task("task:increment multi", "Calls the increment() function of FHECounterMulti Contract")
   .addOptionalParam("address", "Optionally specify the FHECounterMulti contract address")
   .addParam("value1", "The first value")
