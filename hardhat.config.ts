@@ -10,9 +10,12 @@ import { vars } from "hardhat/config";
 import "solidity-coverage";
 
 import "./tasks/accounts";
-import "./tasks/FHECounter";
-import "./tasks/Fhecounter_Multi";
-import "./tasks/FHE_Profile_Single_Task";
+import "./tasks/00_FHECounter";
+import "./tasks/01_Fhecounter_Multi";
+import "./tasks/02_FHE_Profile_Single_Task";
+import "./tasks/03_FHE_Profile_Multi_Task";
+import "./tasks/04_EncryptMultipleValuesTask";
+import "./tasks/05_EncryptMultipleValuesTaskProfiles";
 
 import * as dotenv from "dotenv";
 dotenv.config();
