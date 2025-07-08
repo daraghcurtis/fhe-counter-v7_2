@@ -53,5 +53,5 @@ npx hardhat --network localhost deploy --tags FHEProfileStorage
 ```
 
 - Contract: `FHEProfileStorage.sol`
-- Profile source file: `test_data/profile1.json`
-- Main task file: `FHE_Profile_Single_Task.ts`
+- Profile source file: `testData/profile1.json`
+- Main task file: `02_FHE_Profile_Single_Task.ts`
