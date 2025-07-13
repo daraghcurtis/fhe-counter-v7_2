@@ -16,6 +16,7 @@ import "./tasks/02_FHE_Profile_Single_Task";
 import "./tasks/03_FHE_Profile_Multi_Task";
 import "./tasks/04_EncryptMultipleValuesTask";
 import "./tasks/05_EncryptMultipleValuesTaskProfiles";
+import "./tasks/06_ZKP_1_Value_Task";
 
 import * as dotenv from "dotenv";
 dotenv.config();
