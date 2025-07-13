@@ -237,7 +237,7 @@
 		  "Field_Name":"VEHICLE_MAKE",
 		  "Source_Value":"IVECO",
 		  "Rate_Factor_Value":13,
-		  "Mapping_ID":533
+		  "Mapping_ID":535
 		},
 		{
 		  "Field_Name":"VEHICLE_USAGE",

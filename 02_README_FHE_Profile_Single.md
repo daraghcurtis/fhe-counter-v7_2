@@ -4,7 +4,7 @@ This project demonstrates how to use Zama's FHEVM to securely store and compute 
 
 ---
 
-## 🚀 Setup
+## Setup
 
 1. Start the local Hardhat node in a separate terminal:
 
@@ -32,7 +32,7 @@ npx hardhat test
 
 ## 🔐 Usage
 
-### 📦 Encrypt and Upload a Profile (Manually Task)
+### Encrypt and Upload a Profile (Manually Task)
 
 Encrypt a profile JSON file (e.g., `test_data/profile1.json`) and send it to the FHEProfileStorage contract:
 

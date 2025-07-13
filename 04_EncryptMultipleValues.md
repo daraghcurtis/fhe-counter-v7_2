@@ -7,7 +7,7 @@ Encrypted inputs are submitted to a deployed contract (on local or Sepolia testn
 
 ---
 
-## 📦 Setup
+## Setup
 
 1. **Start the local Hardhat node** (optional):
 ```bash
@@ -27,7 +27,7 @@ npx hardhat --network localhost deploy --tags EncryptMultipleValues
 
 ---
 
-## 🌍 Sepolia Deployment (Testnet)
+## Sepolia Deployment (Testnet)
 
 1. **Add `.env` file** to root directory:
 ```
@@ -44,7 +44,7 @@ After deployment, copy the deployed contract address to use in the next step.
 
 ---
 
-## 🚀 Task: Encrypt & Submit Values
+## Task: Encrypt & Submit Values
 
 To encrypt two batches of 9 values each and submit them to the deployed contract:
 
@@ -59,11 +59,11 @@ This will:
 
 ---
 
-## 🧪 Run Tests (Optional)
+## Run Tests (Optional)
 
 ### Localhost Test:
 ```bash
-npx hardhat test test/EncryptMultipleValues.ts
+npx hardhat test test/04_EncryptMultipleValues.ts
 ```
 
 This test:
@@ -73,7 +73,7 @@ This test:
 
 ---
 
-## 📁 Key Files
+## Key Files
 
 | File                                           | Purpose |
 |------------------------------------------------|---------|
@@ -84,7 +84,7 @@ This test:
 
 ---
 
-## 📝 Notes
+## Notes
 
 - Uses Zama's FHEVM mock or real CLI API based on network
 - Task and deploy scripts are reusable across environments

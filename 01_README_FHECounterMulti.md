@@ -4,7 +4,7 @@ This project demonstrates how to use Zama's FHEVM to perform confidential additi
 
 ---
 
-## 🚀 Setup
+## Setup
 
 1. Start the local Hardhat node in a separate terminal:
 
@@ -46,7 +46,7 @@ This decrypts and prints the clear count value.
 
 ---
 
-## ✅ Example Output
+## Example Output
 
 ```bash
 FHECounterMulti increment(1+2+3) succeeded!

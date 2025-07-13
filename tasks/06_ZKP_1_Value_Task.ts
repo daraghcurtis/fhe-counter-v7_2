@@ -18,7 +18,7 @@ task("task:zkpTestOne", "Encrypts 533, sends to contract, compares with encrypte
       input.add32(value);
       const encrypted = await input.encrypt();
 
-      console.log("📤 Sending encrypted value:", value);
+      console.log("Sending encrypted value:", value);
       const tx = await contract.testSingleValue(encrypted.handles[0], encrypted.inputProof);
       await tx.wait();
 
@@ -30,8 +30,8 @@ task("task:zkpTestOne", "Encrypts 533, sends to contract, compares with encrypte
         signer
       );
 
-      console.log("🔎 Decrypted result:", decryptedResult);
-        console.log(decryptedResult === 1n ? "✅ MATCH" : "❌ NO MATCH");
+      console.log("Decrypted result:", decryptedResult);
+        console.log(decryptedResult === 1n ? "MATCH" : "NO MATCH");
   });
 
 task("task:encryptAllowableCar", "Encrypts the allowableCar value (533) for future use")
@@ -54,5 +54,5 @@ task("task:encryptAllowableCar", "Encrypts the allowableCar value (533) for futu
 
         const tx = await contract.setAllowableCar(encrypted.handles[0], encrypted.inputProof);
         await tx.wait();
-        console.log("📬 Sent to setAllowableCar()");
+        console.log("Sent to setAllowableCar()");
   });

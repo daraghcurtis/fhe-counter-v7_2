@@ -47,7 +47,7 @@ describe("FHEEncryptedEquality - ZKP 1 Value Test", function () {
     const encryptedResult1 = await contract.getLastResult();
     const result1 = await hre.fhevm.userDecryptEuint(FhevmType.euint32, encryptedResult1, contractAddress, signer);
 
-    console.log("✅ Test match with 533 =>", result1);
+    console.log("Test match with 533 =>", result1);
     expect(result1).to.equal(1n);
   });
 
@@ -63,7 +63,7 @@ describe("FHEEncryptedEquality - ZKP 1 Value Test", function () {
     const encryptedResult2 = await contract.getLastResult();
     const result2 = await hre.fhevm.userDecryptEuint(FhevmType.euint32, encryptedResult2, contractAddress, signer);
 
-    console.log("❌ Test non-match with 534 =>", result2);
+    console.log("Test non-match with 534 =>", result2);
     expect(result2).to.equal(0n);
   });
 });

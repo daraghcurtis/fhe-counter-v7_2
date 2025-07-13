@@ -8,10 +8,14 @@ This project demonstrates a confidential comparison between two encrypted values
 
 ---
 
-## 📦 Setup
+## Setup
 
-Start from a clean build and compile the project:
+1. **Start your local node** (optional):
+```bash
+npx hardhat node
+```
 
+From a different terminal window - start from a clean build and compile the project:
 ```bash
 npx hardhat clean
 npx hardhat compile
@@ -19,7 +23,7 @@ npx hardhat compile
 
 ---
 
-## 🌍 Deploy to localhost
+## Deploy to localhost
 
 Deploy only the tagged `FHEEncryptedEquality` contract:
 
@@ -29,7 +33,7 @@ npx hardhat deploy --tags FHEEncryptedEquality --network localhost
 
 ---
 
-## 🧪 Run Tasks
+## Run Tasks
 
 1. **Encrypt and store `allowableCar = 533`:**
 
@@ -45,7 +49,7 @@ npx hardhat task:zkpTestOne --network localhost
 
 ---
 
-## 🧪 Run Tests
+## Run Tests
 
 Run the test file to validate both matching and non-matching values:
 
@@ -55,18 +59,18 @@ npx hardhat test test/06_ZKP_1_Value_Test.ts --network localhost
 
 ---
 
-## ✅ Expected Output
+## Expected Output
 
 The test logs should show:
 
 ```
-✅ Test match with 533 => 1n
-❌ Test non-match with 534 => 0n
+Test match with 533 => 1n
+Test non-match with 534 => 0n
 ```
 
 ---
 
-## 📁 Key Files
+## Key Files
 
 | File                             | Purpose                                 |
 |----------------------------------|-----------------------------------------|

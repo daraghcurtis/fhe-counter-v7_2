@@ -2,6 +2,8 @@ import { task } from "hardhat/config";
 import { FhevmType } from "@fhevm/hardhat-plugin";
 import fs from "fs";
 
+// USAGE : npx hardhat task:calculatePremium --network localhost
+
 task("calculatePremium", "Encrypts profile and sends to contract")
   .addParam("contract", "Contract address")
   .addParam("profile", "Path to JSON file for a single insurance profile")
