@@ -41,7 +41,7 @@
 		  "Field_Name":"VEHICLE_MAKE",
 		  "Source_Value":"NISSAN",
 		  "Rate_Factor_Value":25,
-		  "Mapping_ID":524
+		  "Mapping_ID":533
 		},
 		{
 		  "Field_Name":"VEHICLE_USAGE",
@@ -139,7 +139,7 @@
 		  "Field_Name":"VEHICLE_MAKE",
 		  "Source_Value":"IVECO",
 		  "Rate_Factor_Value":13,
-		  "Mapping_ID":512
+		  "Mapping_ID":533
 		},
 		{
 		  "Field_Name":"VEHICLE_USAGE",
@@ -237,7 +237,7 @@
 		  "Field_Name":"VEHICLE_MAKE",
 		  "Source_Value":"IVECO",
 		  "Rate_Factor_Value":13,
-		  "Mapping_ID":512
+		  "Mapping_ID":533
 		},
 		{
 		  "Field_Name":"VEHICLE_USAGE",
