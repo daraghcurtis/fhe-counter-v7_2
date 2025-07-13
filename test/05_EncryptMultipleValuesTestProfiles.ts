@@ -42,7 +42,7 @@ describe("EncryptMultipleValuesProfiles full flow", function () {
       await (await contract.initializeBatch0(encrypted.handles.slice(0, 9), encrypted.inputProof)).wait();
       const encryptedSum0 = await contract.getSum0();
       const result0 = await fhevm.userDecryptEuint(FhevmType.euint32, encryptedSum0, deployed.address, signer);
-      console.log(`📈 Batch 0 Result: ${Number(result0)} — Expected: ${expectedA}`);
+      console.log(`Batch 0 Result: ${Number(result0)} — Expected: ${expectedA}`);
       expect(Number(result0)).to.equal(expectedA);
 
       if (profileB) {
@@ -50,11 +50,11 @@ describe("EncryptMultipleValuesProfiles full flow", function () {
         await (await contract.initializeBatch1(encrypted.handles.slice(9, 18), encrypted.inputProof)).wait();
         const encryptedSum1 = await contract.getSum1();
         const result1 = await fhevm.userDecryptEuint(FhevmType.euint32, encryptedSum1, deployed.address, signer);
-        console.log(`📈 Batch 1 Result: ${Number(result1)} — Expected: ${expectedB}`);
+        console.log(`Batch 1 Result: ${Number(result1)} — Expected: ${expectedB}`);
         expect(Number(result1)).to.equal(expectedB);
       }
     }
 
-    console.log("\n✅ All profile premiums matched expected values.");
+    console.log("\nAll profile premiums matched expected values.");
   });
 });

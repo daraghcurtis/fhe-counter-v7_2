@@ -42,7 +42,7 @@ task("task:sendProfileBatches", "Encrypts batches from profile5.json and sends t
       ] : [];
 
       if (valuesA.length !== 9 || (profileB && valuesB.length !== 9)) {
-        console.error(`❌ One of the profiles at index ${i} has invalid number of values.`);
+        console.error(`One of the profiles at index ${i} has invalid number of values.`);
         continue;
       }
 
@@ -65,14 +65,14 @@ task("task:sendProfileBatches", "Encrypts batches from profile5.json and sends t
       const decrypted0 = await fhevm.userDecryptEuint(FhevmType.euint32, encryptedSum0, deployed.address, signer);
       const result0 = Number(decrypted0);
       const match0 = result0 === expectedPremiumA;
-      console.log(`\ud83d\udcc8 Decrypted sum (batch 0): ${result0} — Expected ${expectedPremiumA} | ${match0 ? "✅ MATCH" : "❌ MISMATCH"}`);
+      console.log(`\ud83d\udcc8 Decrypted sum (batch 0): ${result0} — Expected ${expectedPremiumA} | ${match0 ? "MATCH" : "MISMATCH"}`);
 
       if (profileB) {
         const encryptedSum1 = await contract.getSum1();
         const decrypted1 = await fhevm.userDecryptEuint(FhevmType.euint32, encryptedSum1, deployed.address, signer);
         const result1 = Number(decrypted1);
         const match1 = result1 === expectedPremiumB;
-        console.log(`\ud83d\udcc8 Decrypted sum (batch 1): ${result1} — Expected ${expectedPremiumB} | ${match1 ? "✅ MATCH" : "❌ MISMATCH"}`);
+        console.log(`\ud83d\udcc8 Decrypted sum (batch 1): ${result1} — Expected ${expectedPremiumB} | ${match1 ? "MATCH" : "MISMATCH"}`);
       }
     }
 

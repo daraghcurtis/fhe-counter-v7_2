@@ -6,10 +6,6 @@ import type { TaskArguments } from "hardhat/types";
 import * as fs from "fs";
 import * as path from "path";
 
-/**
- * Example:
- *   npx hardhat --network localhost task:calculatePremiumsBatch
- */
 
 task("task:calculatePremiumsBatch", "Encrypts multiple profiles and sends them to FHEProfileBatchStorage")
   .addParam("contract", "Address of the deployed FHEProfileBatchStorage contract")
@@ -45,10 +41,10 @@ task("task:calculatePremiumsBatch", "Encrypts multiple profiles and sends them t
     }
 
 
-    console.log(`🚀 Submitting ${profileBatchHandles.length} encrypted profiles in one transaction...`);
+    console.log(`Submitting ${profileBatchHandles.length} encrypted profiles in one transaction...`);
 
     const tx = await contract.storeBatchProfilesAndCalculateWithBase(profileBatchHandles, profileProofs);
     await tx.wait();
 
-    console.log("✅ Batch transaction complete");
+    console.log("Batch transaction complete");
   });

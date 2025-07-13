@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 describe("EncryptMultipleValues", function () {
-  this.timeout(300000); // ✅ 5 min timeout for Sepolia
+  this.timeout(300000); // 5 min timeout for Sepolia
 
   let contract: EncryptMultipleValues;
   let contractAddress: string;
@@ -50,7 +50,7 @@ describe("EncryptMultipleValues", function () {
     const dec0 = await fhevm.userDecryptEuint(FhevmType.euint32, encSum0, contractAddress, signer);
     const dec1 = await fhevm.userDecryptEuint(FhevmType.euint32, encSum1, contractAddress, signer);
 
-    console.log("📦 Decrypted sum (batch 0):", Number(dec0));
-    console.log("📦 Decrypted sum (batch 1):", Number(dec1));
+    console.log("Decrypted sum (batch 0):", Number(dec0));
+    console.log("Decrypted sum (batch 1):", Number(dec1));
   });
 });

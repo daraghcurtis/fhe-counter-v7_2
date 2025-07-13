@@ -34,9 +34,8 @@ contract FHEEncryptedEquality is SepoliaConfig {
         FHE.allowThis(_lastResult);
         FHE.allow(_lastResult, msg.sender);
 
-        // Commented out due to unsupported method
-        // emit EncryptedValuesCompared(...);
     }
+
 
 
     function getLastResult() public view returns (euint32) {

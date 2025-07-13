@@ -13,7 +13,7 @@ eaddress
 import { SepoliaConfig } from "@fhevm/solidity/config/ZamaConfig.sol";
 
 contract FHEZKP1Value is SepoliaConfig {
-    // 🔍 Debug Events
+    // Debug Events
     event DebugStep(string step);
     event DebugMappingRaw(euint32 allowed, euint32 actual, euint32 guard);
     event DebugMappingBatch1Raw(euint32 a, euint32 b, euint32 guard);
@@ -40,7 +40,7 @@ contract FHEZKP1Value is SepoliaConfig {
         ebool isEqual = FHE.eq(allowed, actual);
         euint32 guard = FHE.select(isEqual, FHE.asEuint32(1), FHE.asEuint32(0));
 
-        emit DebugMappingRaw(allowed, actual, guard); // 🔍 Emits encrypted MappingID check inputs
+        emit DebugMappingRaw(allowed, actual, guard); // Emits encrypted MappingID check inputs
 
         // Load encrypted inputs
         for (uint i = 0; i < 9; i++) {
@@ -76,7 +76,7 @@ contract FHEZKP1Value is SepoliaConfig {
         ebool isEqual = FHE.eq(a, b);
         euint32 guard = FHE.select(isEqual, FHE.asEuint32(1), FHE.asEuint32(0));
 
-        emit DebugMappingBatch1Raw(a, b, guard); // 🔍 Emits encrypted MappingID equality check
+        emit DebugMappingBatch1Raw(a, b, guard); // Emits encrypted MappingID equality check
 
         // Load encrypted inputs
         for (uint i = 0; i < 9; i++) {

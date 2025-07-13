@@ -13,7 +13,7 @@ Base_Premium × (1 + sum of 8 encrypted variables)
 
 ---
 
-## 📦 Setup
+## Setup
 
 1. **Start your local node** (optional):
 ```bash
@@ -27,20 +27,20 @@ npx hardhat compile
 ```
 
 ---
-## 🌍 Deploy to localhost
+## Deploy to localhost
 
 ```bash
 npx hardhat --network localhost deploy --tags EncryptMultipleValuesProfiles
 ```
 
-## 🧪 Run Local Tests
+## Run Local Tests
 
 To validate everything locally:
 ```bash
 npx hardhat test test/05_EncryptMultipleValuesTestProfiles.ts --network localhost
 ```
 
-## 🧪 Run Task files for local testing
+## Run Task files for local testing
 
 To validate everything locally:
 ```bash
@@ -48,7 +48,7 @@ $ npx hardhat --network localhost task:sendProfileBatches
 ```
 
 ---
-## 🌍 Deploy to Sepolia (Testnet)
+## Deploy to Sepolia (Testnet)
 
 1. Add `.env` file to your root:
 ```
@@ -64,7 +64,7 @@ npx hardhat --network sepolia deploy --tags EncryptMultipleValuesProfiles
 
 ---
 
-## 🚀 Send Encrypted Profile Data
+## Send Encrypted Profile Data
 
 All profiles in `testData/profile5.json` will be processed in pairs and sent to the contract:
 
@@ -84,13 +84,13 @@ This script:
 You’ll see logs like:
 ```
 Sending batch for profile 0 (OBJECT_ID: ABC123)
-📈 Batch 0 Result: 8400 — Expected: 8400
-✅ All profile premiums matched expected values.
+Batch 0 Result: 8400 — Expected: 8400
+All profile premiums matched expected values.
 ```
 
 ---
 
-## 📁 Key Files
+## Key Files
 
 | File                                             | Purpose |
 |--------------------------------------------------|---------|
@@ -101,7 +101,7 @@ Sending batch for profile 0 (OBJECT_ID: ABC123)
 
 ---
 
-## 📝 Notes
+## Notes
 
 - Works on both localhost and Sepolia
 - Profile input comes from `testData/profile5.json`
