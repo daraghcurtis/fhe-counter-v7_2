@@ -1,83 +1,56 @@
-# 🔐 FHEProfileStorage (Multi Profile) – Zama FHEVM Testnet Flow
+# FHEMULTIProfileStorage Quick Start
 
-This project demonstrates how to use **Zama's FHEVM** to store and compute over encrypted insurance profile data — but now supports **multiple profiles**, each with up to 8 encrypted rate factors and a base premium.
-
-Encrypted inputs are submitted to a deployed contract (on local or Sepolia testnet), summed privately on-chain, and the resulting premium is decrypted and verified.
+Shows how to use FHEVM to securely store and compute encrypted insurance profile data.  
+Each profile includes multiple encrypted rate factors, which are summed confidentially on-chain to compute a premium.
 
 ---
 
 ## Setup
 
-1. **Start the local Hardhat node** in a separate terminal:
+1. Start the local Hardhat node in a separate terminal:
 ```bash
 npx hardhat node
 ```
 
-2. **Clean and compile** the contract:
+2. (New terminal window) Clean the project and compile the contracts:
 ```bash
 npx hardhat clean
 npx hardhat compile
 ```
 
-3. **Deploy the contract locally**:
+3. Deploy the FHEMULTIProfileStorage contract:
 ```bash
 npx hardhat --network localhost deploy --tags FHEMULTIProfileStorage
 ```
 
+4. Run the test suite:
+```bash
+npx hardhat test test/03_FHE_Profile_Multi_3.test.ts
+```
+
 ---
 
-## Sepolia Deployment (Testnet)
+## Sepolia Testnet Setup
 
-1. **Set your `.env` file** with:
-
+1. Set your `.env` file:
 ```
 PRIVATE_KEY=your_wallet_private_key
 SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_KEY
 SEPOLIA_FHEPROFILE_CONTRACT=0xYourDeployedSepoliaAddress
 ```
 
-2. **Deploy to Sepolia**:
+2. Deploy to Sepolia:
 ```bash
 npx hardhat deploy --network sepolia --tags FHEMULTIProfileStorage
 ```
 
----
-
-## Run Tests
-
-### Local Test:
-
-```bash
-npx hardhat test test/03_FHE_Profile_Multi_3.test.ts
-```
-
-### Sepolia Test:
-
+3. Run the Sepolia test:
 ```bash
 npx hardhat test test/03_FHE_Profile_Multi_3.test.ts --network sepolia
 ```
 
-Each profile in `testData/profile3.json` is:
-- Encrypted using the Relayer SDK
-- Submitted to the smart contract
-- Calculated on-chain
-- Decrypted and verified against `Calculated_Premium`
-
 ---
 
-## Key Files
-
-| File | Purpose |
-|------|---------|
-| `FHEProfileStorage.sol` | Confidential smart contract |
-| `test/03_FHE_Profile_Multi_3.test.ts` | Main test file (supports Sepolia & localhost) |
-| `testData/profile3.json` | Multiple profiles to be processed |
-| `.env` | Holds Sepolia contract address and API keys |
-
----
-
-## Notes
-
-- Tests automatically use `.env` on Sepolia
-- Falls back to local deployment if `--network sepolia` not passed
-- Modify `testData/profile3.json` to test new profiles
+- Contract: `FHEProfileStorage.sol`
+- Profile input file: `testData/profile3.json`
+- Task script: `03_FHE_Profile_Multi_3.test.ts`

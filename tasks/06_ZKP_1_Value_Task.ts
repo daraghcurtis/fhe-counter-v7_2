@@ -49,7 +49,7 @@ task("task:encryptAllowableCar", "Encrypts the allowableCar value (533) for futu
         const encrypted = await input.encrypt();
 
         console.log("🚗 Encrypted allowableCar value:", allowableCar);
-        console.log("🔐 Encrypted handle:", encrypted.handles[0]);
+        console.log(" Encrypted handle:", encrypted.handles[0]);
         console.log("🧾 Proof size:", encrypted.inputProof.length);
 
         const tx = await contract.setAllowableCar(encrypted.handles[0], encrypted.inputProof);
