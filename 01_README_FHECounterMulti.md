@@ -1,19 +1,19 @@
 # FHECounterMulti Quick Start
-
-This project demonstrates how to use Zama's FHEVM to perform confidential additions using encrypted inputs. It supports multi-value encryption (3 inputs summed together) and secure decryption of the final result.
+Basic OOB Project from ZAMA - demonstrates how to use FHEVM to perform confidential additions using encrypted inputs. 
+Multi-value encryption (3 inputs summed together) and secure decryption of the final result.
 
 ---
 
 ## Setup
 
-1. Start the local Hardhat node in a separate terminal:
+1. Start Hardhat node in a separate terminal:
 
 ```bash
 npx hardhat node
 ```
-1B. SANITY TEST
+1B. SANITY TEST (New window)
 ```bash
-npx hardhat test
+npx hardhat test test/01_FHECounterMulti.test.ts
 ```
 
 2. Deploy the multi-value FHE counter contract:
@@ -24,43 +24,24 @@ npx hardhat --network localhost deploy --tags FHECounterMulti
 
 ---
 
-## 🔐 Usage
+##  Usage
 
-### ➕ Increment using 3 encrypted values
+### Increment using 3 encrypted values
 
 ```bash
 npx hardhat --network localhost task:increment --value1 1 --value2 2 --value3 3
 ```
 
-This securely encrypts and adds 1 + 2 + 3 to the counter.
-
 ---
 
-### 🔓 Decrypt the current encrypted count
+### Decrypt the current encrypted count
 
 ```bash
 npx hardhat --network localhost task:decrypt-count
 ```
 
-This decrypts and prints the clear count value.
+Decrypts and prints the clear count value.
 
 ---
-
-## Example Output
-
-```bash
-FHECounterMulti increment(1+2+3) succeeded!
-Encrypted count: 0xa9d1...690400
-Clear count    : 6
-```
-
----
-
-## 🛠 Notes
-
-- If you restart the node, you must redeploy:
-  ```bash
-  npx hardhat --network localhost deploy --tags FHECounterMulti
-  ```
 
 - Contract used: `FHECounterMulti`

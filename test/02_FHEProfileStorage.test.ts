@@ -66,8 +66,8 @@ describe("FHEProfileStorage with base premium", function () {
       deployer
     );
 
-    console.log(`🔐 Encrypted Count: ${encryptedCount}`);
-    console.log(`🔓 Clear Count     : ${clearCount}`);
+    console.log(` Encrypted Count: ${encryptedCount}`);
+    console.log(`Clear Count     : ${clearCount}`);
     console.log(`📊 Expected Premium: ${profile.Calculated_Premium}`);
     expect(clearCount).to.equal(profile.Calculated_Premium);
   });
