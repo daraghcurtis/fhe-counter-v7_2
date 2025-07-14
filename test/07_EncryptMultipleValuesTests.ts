@@ -20,7 +20,7 @@ task("task:checkAllCarsFromJson", "Sends VEHICLE_MAKE Mapping_ID from each profi
     const contract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", deployed.address, signer);
 
     // Load JSON
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const profiles = profileJson["Profiles"];
 
@@ -77,7 +77,7 @@ describe("FHE Profile Validation Test", function () {
     const deployed = await deployments.get("EncryptMultipleValuesProfiles07");
     const contract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", deployed.address, signer);
 
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const basePremium = parseInt(profileJson["Base_Premium"]);
     const profiles = profileJson["Profiles"];

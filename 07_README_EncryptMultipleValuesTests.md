@@ -53,5 +53,28 @@ npx hardhat task:validateWithFullAllowableList --network localhost
 
 ---
 
+### Run tasks On Testnet (Sepolia)
+
+```bash
+npx hardhat clean
+npx hardhat compile
+npx hardhat deploy --tags EncryptMultipleValuesProfiles07 --network sepolia
+```
+
+Set the retunred contract address in the .env file , e.g :
+SEPOLIA_FHEPROFILE_CONTRACT=0x4cbAeFDab2FA20f30F031C4042242dea533A4aA
+
+then ... 
+```bash
+npx hardhat task:setAllowableCars --network sepolia
+npx hardhat task:getAllAllowableCars --network sepolia
+npx hardhat task:testAgainstAllAllowableCars --network sepolia
+npx hardhat task:validateWithFullAllowableList --network sepolia
+
+npx hardhat test test/07_EncryptMultipleValuesTests.ts --network sepolia
+```
+
+---
+
 - Contract: `EncryptMultipleValuesProfiles07.sol`
 - Test file: `test/07_EncryptMultipleValuesTests.ts`

@@ -20,7 +20,7 @@ task("task:checkAllCarsFromJson", "Sends VEHICLE_MAKE Mapping_ID from each profi
     const contract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", deployed.address, signer);
 
     // Load JSON
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const profiles = profileJson["Profiles"];
 
@@ -87,18 +87,23 @@ task("task:getAllowableCar", "Fetches and decrypts the single allowable car Mapp
     console.log(` Single Allowable Mapping_ID: ${decrypted}`);
   });
 
-
 task("task:setAllowableCars", "Encrypts and sets an array of allowable car Mapping_IDs")
   .setAction(async function (_taskArguments: TaskArguments, hre) {
     const { ethers, deployments, fhevm } = hre;
-    await fhevm.initializeCLIApi();
+    const startOverall = Date.now();
 
+    await fhevm.initializeCLIApi();
     const signer = (await ethers.getSigners())[0];
     const zkpDeployed = await deployments.get("EncryptMultipleValuesProfiles07");
     const zkpContract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", zkpDeployed.address, signer);
 
     // === Mapping_IDs to allow ===
-    const mappingIDs = [533, 534, 535];
+    const mappingIDs = [
+      500, 501, 502, 503, 504, 505, 506, 507, 508, 509,
+      510, 511, 512, 513, 514, 515, 516, 517, 518, 519,
+      520, 521, 522, 523, 524, 525, 526, 527, 528, 529,
+      530, 531, 532, 533, 534, 535, 536, 537, 538
+    ];
 
     // === Encrypt array ===
     const input = fhevm.createEncryptedInput(zkpDeployed.address, signer.address);
@@ -107,16 +112,24 @@ task("task:setAllowableCars", "Encrypts and sets an array of allowable car Mappi
 
     console.log(` Setting allowableCars to Mapping_IDs: ${mappingIDs.join(", ")}`);
 
-    await (
-      await zkpContract.setAllowableCars(encrypted.handles, encrypted.inputProof)
-    ).wait();
+    await (await zkpContract.setAllowableCars(encrypted.handles, encrypted.inputProof)).wait();
 
-    console.log(`Mapping_IDs ${mappingIDs.join(", ")} stored in contract.`);
+    const totalTime = (Date.now() - startOverall) / 1000;
+    const avgPerMappingID = totalTime / mappingIDs.length;
+
+    console.log(`Mapping_IDs stored in contract.`);
+    console.log(`Total Task Time: ${totalTime.toFixed(2)} sec`);
+    console.log(`Number of Mapping_IDs: ${mappingIDs.length}`);
+    console.log(`Avg Time per Mapping_ID : ${avgPerMappingID.toFixed(4)} sec`);
   });
+
+
 
 task("task:getAllAllowableCars", "Fetches and decrypts all allowable car Mapping_IDs from the contract")
   .setAction(async function (_taskArguments, hre) {
     const { ethers, deployments, fhevm } = hre;
+    const startOverall = Date.now();
+
     await fhevm.initializeCLIApi();
 
     const signer = (await ethers.getSigners())[0];
@@ -126,6 +139,8 @@ task("task:getAllAllowableCars", "Fetches and decrypts all allowable car Mapping
     const encryptedList = await zkpContract.getAllAllowableCars();
 
     console.log(`Found ${encryptedList.length} stored Mapping_ID(s):`);
+
+    const startDecrypt = Date.now();
     for (let i = 0; i < encryptedList.length; i++) {
       const decrypted = await fhevm.userDecryptEuint(
         FhevmType.euint32,
@@ -135,31 +150,42 @@ task("task:getAllAllowableCars", "Fetches and decrypts all allowable car Mapping
       );
       console.log(` Index ${i}: Mapping_ID = ${decrypted}`);
     }
+    const endDecrypt = Date.now();
+
+    const totalTime = (Date.now() - startOverall) / 1000;
+    const profileTime = (endDecrypt - startDecrypt) / 1000;
+    const avgPerProfile = encryptedList.length ? profileTime / encryptedList.length : 0;
+
+    console.log(`\nTotal Task Time: ${totalTime.toFixed(2)} sec`);
+    console.log(`Total Profile Processing Time: ${profileTime.toFixed(2)} sec`);
+    console.log(`Avg Time per Profile : ${avgPerProfile.toFixed(4)} sec`);
   });
+
 
 
 task("task:testAgainstAllAllowableCars", "Sends VEHICLE_MAKE Mapping_ID from each profile and checks against full allowable list")
   .setAction(async function (_, hre) {
     const { ethers, deployments, fhevm } = hre;
+    const startOverall = Date.now();
+
     await fhevm.initializeCLIApi();
     const signer = (await ethers.getSigners())[0];
     const path = require("path");
     const fs = require("fs").promises;
     const { FhevmType } = require("@fhevm/hardhat-plugin");
 
-    // Load contract
     const deployed = await deployments.get("EncryptMultipleValuesProfiles07");
     const contract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", deployed.address, signer);
 
-    // Load JSON
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const profiles = profileJson["Profiles"];
+    const numProfiles = Math.min(10, profiles.length);
 
-    for (let i = 0; i < profiles.length; i++) {
+    const startTests = Date.now();
+    for (let i = 0; i < numProfiles; i++) {
       const profile = profiles[i];
 
-      // Extract VEHICLE_MAKE Mapping_ID
       const vehicleMakeFactor = profile.Factors_Details.find((f: any) => f.Field_Name === "VEHICLE_MAKE");
       const mappingId = parseInt(vehicleMakeFactor.Mapping_ID);
 
@@ -176,7 +202,19 @@ task("task:testAgainstAllAllowableCars", "Sends VEHICLE_MAKE Mapping_ID from eac
       console.log(`Decrypted result: ${decryptedResult}`);
       console.log(decryptedResult === 1n ? "MATCH" : "NO MATCH");
     }
+    const endTests = Date.now();
+
+    const totalTime = (Date.now() - startOverall) / 1000;
+    const profileTime = (endTests - startTests) / 1000;
+    const avgPerProfile = profileTime / numProfiles;
+
+    console.log(`\nTotal Task Time: ${totalTime.toFixed(2)} sec`);
+    console.log(`Total Profile Processing Time: ${profileTime.toFixed(2)} sec`);
+    console.log(`Avg Time per Profile : ${avgPerProfile.toFixed(4)} sec`);
   });
+
+
+
 
 task("task:validateWithFullAllowableList", "Validates car type against list and submits encrypted premiums")
   .setAction(async function (_, hre) {
@@ -185,17 +223,21 @@ task("task:validateWithFullAllowableList", "Validates car type against list and 
     const fs = require("fs").promises;
     const { FhevmType } = require("@fhevm/hardhat-plugin");
 
+    const startOverall = Date.now();
+
     await fhevm.initializeCLIApi();
     const signer = (await ethers.getSigners())[0];
     const deployed = await deployments.get("EncryptMultipleValuesProfiles07");
     const contract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", deployed.address, signer);
 
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const basePremium = parseInt(profileJson["Base_Premium"]);
     const profiles = profileJson["Profiles"];
+    const numProfiles = Math.min(10, profiles.length);
 
-    for (let i = 0; i < profiles.length; i++) {
+    const startCalls = Date.now();
+    for (let i = 0; i < numProfiles; i++) {
       const profile = profiles[i];
       const expectedPremium = parseInt(profile.Calculated_Premium);
 
@@ -242,7 +284,19 @@ task("task:validateWithFullAllowableList", "Validates car type against list and 
 
       console.log(`Premium calculated: ${decryptedSum} — Expected: ${expectedPremium}`);
     }
+
+    const endCalls = Date.now();
+
+    const totalTime = (Date.now() - startOverall) / 1000;
+    const profileTime = (endCalls - startCalls) / 1000;
+    const avgPerProfile = profileTime / numProfiles;
+
+    console.log(`\nTotal Task Time: ${totalTime.toFixed(2)} sec`);
+    console.log(`Total Profile Processing Time: ${profileTime.toFixed(2)} sec`);
+    console.log(`Avg Time per Profile : ${avgPerProfile.toFixed(4)} sec`);
   });
+
+
 
 task("task:sendProfileWithZKPCheck", "Encrypts profile data and compares car Mapping_ID to allowableCar")
   .setAction(async function (_taskArguments: TaskArguments, hre) {
@@ -258,7 +312,7 @@ task("task:sendProfileWithZKPCheck", "Encrypts profile data and compares car Map
     const zkpContract = await ethers.getContractAt("FHEEncryptedEquality", zkpDeployed.address, signer);
 
     // === Load Profile JSON ===
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const basePremium = parseInt(profileJson["Base_Premium"]);
     const profiles = profileJson["Profiles"];
@@ -311,7 +365,7 @@ task("task:sendProfileWithZKPCheck", "Encrypts profile data and compares car Map
     }
   });
 
-task("task:validateAndSubmitPremiumsFromJson", "Validates car type and submits encrypted premiums")
+task("task:validateAndSubmitPremiumsFromJson", "Validates car type (one allowed) and submits encrypted premiums")
   .setAction(async function (_, hre) {
     const { ethers, deployments, fhevm } = hre;
     await fhevm.initializeCLIApi();
@@ -322,10 +376,11 @@ task("task:validateAndSubmitPremiumsFromJson", "Validates car type and submits e
     const contract = await ethers.getContractAt("EncryptMultipleValuesProfiles07", deployed.address, signer);
 
     // Load JSON
-    const profilePath = path.join(__dirname, "../testData/profile5.json");
+    const profilePath = path.join(__dirname, "../testData/profileAll.json");
     const profileJson = JSON.parse(await fs.readFile(profilePath, "utf8"));
     const basePremium = parseInt(profileJson["Base_Premium"]);
     const profiles = profileJson["Profiles"];
+
 
     for (let i = 0; i < profiles.length; i++) {
       const profile = profiles[i];
